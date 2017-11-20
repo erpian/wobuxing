@@ -1,0 +1,61 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>A</title>
+    <link href="index.css" rel="stylesheet" />
+</head>
+<body style="background-color:black;">
+
+
+
+    <div>
+        <img src="../img/t_b1.png" style="z-index: 1000; width: 400px; position:absolute;" />
+        <div id="ddd" style="background-color:red;width:100px;height:100px;z-index:1005;position:relative;"></div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
+    <script src="https://cdn.bootcss.com/touchjs/0.2.14/touch.min.js"></script>
+    <script>
+        var dx = 0;
+        var dy = 0;
+        touch.on('#ddd', 'touchstart', function (ev) {
+            //if ($("#ddd").hasClass("m-activation")) {
+            //    $("#ddd").removeClass("m-activation");
+            //} else {
+            //    $("#ddd").addClass("m-activation");
+            //}
+            console.log("a");
+            ev.preventDefault();
+        });
+
+        touch.on('#ddd', "drag", function (ev) {
+
+
+            //if ($('#ddd').hasClass("m-activation")) {
+            var localX = dx + ev.x;
+            var localY = dy + ev.y;
+
+            if (localX > 0 && localX < window.innerWidth &&
+            localY > 0 && localY < window.innerHeight) {
+                console.log(localX + "," + localY);
+                this.style.webkitTransform = 'translate3d(' + localX + "px," + localY + "px,0)";
+            }
+            //}
+
+
+
+        });
+
+        touch.on('#ddd', "dragend", function (ev) {
+            dx += ev.x;
+            dy += ev.y;
+        });
+    </script>
+</body>
+</html>
