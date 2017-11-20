@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>1.5</title>
+    <title>1.6</title>
     <link href="index.css" rel="stylesheet" />
 </head>
 <body style="background-color:black;">
@@ -27,22 +27,6 @@
     <script src="https://cdn.bootcss.com/exif-js/2.3.0/exif.js"></script>
     <script src="cat.js"></script>
     <script>
-        function getFileUrl(sourceId) {
-            var url;
-            if (navigator.userAgent.indexOf("MSIE") >= 1) { // IE  
-                url = document.getElementById(sourceId).value;
-            } else if (navigator.userAgent.indexOf("Firefox") > 0) { // Firefox  
-                url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
-            } else if (navigator.userAgent.indexOf("Chrome") > 0) { // Chrome  
-                url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
-            }
-            return url;
-        }
-        function preImg(sourceId, targetId) {
-            var url = getFileUrl(sourceId);
-            var imgPre = document.getElementById(targetId);
-            imgPre.src = url;
-        }
 
         function selectFileImage(fileObj) {
             var file = fileObj.files['0'];
@@ -59,9 +43,7 @@
                 // var URL = URL || webkitURL;  
                 //获取照片方向角属性，用户旋转控制  
                 EXIF.getData(file, function () {
-                    // alert(EXIF.pretty(this));  
                     EXIF.getAllTags(this);
-                    //alert(EXIF.getTag(this, 'Orientation'));   
                     Orientation = EXIF.getTag(this, 'Orientation');
                     //return;  
                 });
@@ -91,22 +73,16 @@
                         var base64 = null;
                         //修复ios  
                         if (navigator.userAgent.match(/iphone/i)) {
-                            console.log('iphone');
-                            //alert(expectWidth + ',' + expectHeight);  
                             //如果方向角不为1，都需要进行旋转 added by lzk  
                             if (Orientation != "" && Orientation != 1) {
-                                alert('旋转处理');
                                 switch (Orientation) {
                                     case 6://需要顺时针（向左）90度旋转  
-                                        alert('需要顺时针（向左）90度旋转');
                                         rotateImg(this, 'left', canvas);
                                         break;
                                     case 8://需要逆时针（向右）90度旋转  
-                                        alert('需要顺时针（向右）90度旋转');
                                         rotateImg(this, 'right', canvas);
                                         break;
                                     case 3://需要180度旋转  
-                                        alert('需要180度旋转');
                                         rotateImg(this, 'right', canvas);//转两次  
                                         rotateImg(this, 'right', canvas);
                                         break;
@@ -125,20 +101,15 @@
                             var encoder = new JPEGEncoder();
                             base64 = encoder.encode(ctx.getImageData(0, 0, expectWidth, expectHeight), 80);
                         } else {
-                            //alert(Orientation);  
                             if (Orientation != "" && Orientation != 1) {
-                                //alert('旋转处理');  
                                 switch (Orientation) {
                                     case 6://需要顺时针（向左）90度旋转  
-                                        alert('需要顺时针（向左）90度旋转');
                                         rotateImg(this, 'left', canvas);
                                         break;
                                     case 8://需要逆时针（向右）90度旋转  
-                                        alert('需要顺时针（向右）90度旋转');
                                         rotateImg(this, 'right', canvas);
                                         break;
                                     case 3://需要180度旋转  
-                                        alert('需要180度旋转');
                                         rotateImg(this, 'right', canvas);//转两次  
                                         rotateImg(this, 'right', canvas);
                                         break;
