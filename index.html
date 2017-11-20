@@ -1,4 +1,4 @@
-﻿
+
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -15,13 +15,45 @@
 
 
     <div>
-        <img src="http://7xssod.com1.z0.glb.clouddn.com/t_b1.png" style="z-index: 1000; width: 360px; position:absolute;" />
-        <div id="ddd" style="background-color:red;width:100px;height:100px;z-index:1005;position:relative;"></div>
+        <img id="img_bg" src="t_b1.png" style="z-index: 1000; width: 400px; position:absolute;" />
+        <img id="ddd" style="background-color:red;width:100px;z-index:1005;position:relative;" src="http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1705.PNG" />
     </div>
+    <ul style="color:#fff;">
+        <li onclick="changeBG(1)">图1</li>
+        <li onclick="changeBG(2)">图2</li>
+        <li onclick="changeBG(3)">图3</li>
+        <li onclick="changeBG(4)">图4</li>
+        <li onclick="changeBG(5)">图5</li>
+        <li onclick="changeBG(6)">图6</li>
+    </ul>
 
     <script src="https://cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
     <script src="https://cdn.bootcss.com/touchjs/0.2.14/touch.min.js"></script>
     <script>
+        function changeBG(i) {
+            switch (i) {
+                case 1:
+                    $('#ddd').attr("src", "http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1705.PNG");
+                    break;
+                case 2:
+                    $('#ddd').attr("src", "http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1688.JPG");
+                    break;
+                case 3:
+                    $('#ddd').attr("src", "http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1687.JPG");
+                    break;
+                case 4:
+                    $('#ddd').attr("src", "http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1519.JPG");
+                    break;
+                case 5:
+                    $('#ddd').attr("src", "http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1512.JPG");
+                    break;
+                case 6:
+                    $('#ddd').attr("src", "http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1496.JPG");
+                    break;
+                default:
+
+            }
+        }
         var dx = 0;
         var dy = 0;
         touch.on('#ddd', 'touchstart', function (ev) {
