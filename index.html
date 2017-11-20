@@ -62,8 +62,20 @@
             //} else {
             //    $("#ddd").addClass("m-activation");
             //}
-            console.log("a");
+            //console.log("a");
             ev.preventDefault();
+        });
+
+        //放大
+        touch.on("#ddd", "pinchout", function (ev) {
+            var oldwidth = parseFloat($("#ddd").css("width").replace('px', ''));
+            $("#ddd").css("width", (oldwidth + 1) + "px");
+        });
+
+        //缩小
+        touch.on("#ddd", "pinchin", function (ev) {
+            var oldwidth = parseFloat($("#ddd").css("width").replace('px', ''));
+            $("#ddd").css("width", (oldwidth -1) + "px");
         });
 
         touch.on('#ddd', "drag", function (ev) {
@@ -75,11 +87,13 @@
 
             if (localX > 0 && localX < window.innerWidth &&
             localY > 0 && localY < window.innerHeight) {
-                console.log(localX + "," + localY);
+                //console.log(localX + "," + localY);
                 this.style.webkitTransform = 'translate3d(' + localX + "px," + localY + "px,0)";
             }
             //}
 
+            //var oldwidth = parseFloat($("#ddd").css("width").replace('px', ''));
+            //console.log($("#ddd").css("width", (oldwidth + 1) + "px"));
 
 
         });
