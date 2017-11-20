@@ -2,5 +2,8 @@ html,body {margin:0;padding:0;}
 
 .m-activation{border:1px solid #fff;}
 
-ul{color: #fff;position: fixed;bottom: 0;z-index:9999;}
+ul{color: #fff;position: fixed;bottom: 0;z-index:9999;padding-left: 10px;}
 li{display: block;border: 1px solid #fff;padding: 5px 20px;}
+
+#img_bg{z-index: 1000; width: 100%; position: absolute; position: absolute; margin-top: 30px;}
+#ddd{background-color: red; width: 100px; z-index: 1005; position: relative;}
