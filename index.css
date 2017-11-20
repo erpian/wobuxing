@@ -3,4 +3,4 @@ html,body {margin:0;padding:0;}
 .m-activation{border:1px solid #fff;}
 
 ul{color: #fff;position: fixed;bottom: 0;z-index:9999;}
-li{}
+li{display: block;border: 1px solid #fff;padding: 5px 20px;}
