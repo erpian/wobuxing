@@ -15,113 +15,86 @@
 
 
     <div>
-        <img id="img_bg" src="http://7xssod.com1.z0.glb.clouddn.com/t_b1.png" style="z-index: 1000; width: 100%; position: absolute; position: absolute; margin-top: 30px;" />
-        <img id="ddd" style="background-color: red; width: 100px; z-index: 1005; position: relative; -webkit-transform: rotate(1deg);" src="http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1705.PNG" />
+        <img id="img_bg" src="http://7xssod.com1.z0.glb.clouddn.com/t_b1.png" />
+        <img id="ddd"  />
     </div>
-    <ul style="color:#fff;">
-        <li onclick="changeBG(1)">图1</li>
-        <li onclick="changeBG(2)">图2</li>
-        <li onclick="changeBG(3)">图3</li>
-        <li onclick="changeBG(4)">图4</li>
-        <li onclick="changeBG(5)">图5</li>
-        <li onclick="changeBG(6)">图6</li>
-    </ul>
+
+
+    <input type="file" value="选择文件" id="sel_file" onchange="preImg(this.id,'ddd');" style="z-index:9999;position:absolute;bottom:20px;left:20px;" />
 
     <script src="https://cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
     <script src="https://cdn.bootcss.com/touchjs/0.2.14/touch.min.js"></script>
+    <script src="cat.js"></script>
     <script>
-        function changeBG(i) {
-            switch (i) {
-                case 1:
-                    $('#ddd').attr("src", "http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1705.PNG");
-                    break;
-                case 2:
-                    $('#ddd').attr("src", "http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1688.JPG");
-                    break;
-                case 3:
-                    $('#ddd').attr("src", "http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1687.JPG");
-                    break;
-                case 4:
-                    $('#ddd').attr("src", "http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1519.JPG");
-                    break;
-                case 5:
-                    $('#ddd').attr("src", "http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1512.JPG");
-                    break;
-                case 6:
-                    $('#ddd').attr("src", "http://7xssod.com1.z0.glb.clouddn.com/At/IMG_1496.JPG");
-                    break;
-                default:
-
+        function getFileUrl(sourceId) {
+            var url;
+            if (navigator.userAgent.indexOf("MSIE") >= 1) { // IE  
+                url = document.getElementById(sourceId).value;
+            } else if (navigator.userAgent.indexOf("Firefox") > 0) { // Firefox  
+                url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+            } else if (navigator.userAgent.indexOf("Chrome") > 0) { // Chrome  
+                url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
             }
+            return url;
         }
-        var dx = 0;
-        var dy = 0;
-        touch.on('#ddd', 'touchstart', function (ev) {
-            //if ($("#ddd").hasClass("m-activation")) {
-            //    $("#ddd").removeClass("m-activation");
-            //} else {
-            //    $("#ddd").addClass("m-activation");
-            //}
-            //console.log("a");
+        function preImg(sourceId, targetId) {
+            var url = getFileUrl(sourceId);
+            var imgPre = document.getElementById(targetId);
+            imgPre.src = url;
+        }
 
+        var $targetObj = $('#ddd');  
+        //初始化设置  
+        cat.touchjs.init($targetObj, function (left, top, scale, rotate) {});  
+        //初始化拖动手势（不需要就注释掉）  
+        cat.touchjs.drag($targetObj, function (left, top) { });  
+        //初始化缩放手势（不需要就注释掉）  
+        cat.touchjs.scale($targetObj, function (scale) { });  
+        //初始化旋转手势（不需要就注释掉）  
+        cat.touchjs.rotate($targetObj, function (rotate) { });  
+
+
+        //var dx = 0;
+        //var dy = 0;
+        //touch.on('#ddd', 'touchstart', function (ev) {
+
+        //    //var reg = /(rotate\([\-\+]?((\d+)(deg))\))/i;
+        //    //var wt = $("#ddd").css('-webkit-transform')
+        //    //var wts = wt.match(reg);
+        //    //var $2 = RegExp.$2;
+        //    //$("#ddd").css('-webkit-transform', (wt.replace($2, parseFloat(RegExp.$3) + 10 + RegExp.$4)));
            
 
-            ev.preventDefault();
-        });
-        //-webkit-transform: rotate(-30deg);
-        //var test = function () {
-        //    var reg = /(rotate\([\-\+]?((\d+)(deg))\))/i;
-        //    var wt = div.style['-webkit-transform'], wts = wt.match(reg);
-        //    var $2 = RegExp.$2;
-        //    console.log($2);
-        //    div.style['-webkit-transform'] = wt.replace($2, parseFloat(RegExp.$3) + 10 + RegExp.$4);
-        //}
-        
-        //向左
-        touch.on("#ddd", "rotateleft", function (ev) {
-            var reg = /(rotate\([\-\+]?((\d+)(deg))\))/i;
-            var wt = $("#ddd").css('-webkit-transform')
-            var wts = wt.match(reg);
-            var $2 = RegExp.$2;
-            $("#ddd").css('-webkit-transform', (wt.replace($2, parseFloat(RegExp.$3) + 10 + RegExp.$4)));
-        });
+        //    ev.preventDefault();
+        //});
 
-        //放大
-        touch.on("#ddd", "pinchout", function (ev) {
-            var oldwidth = parseFloat($("#ddd").css("width").replace('px', ''));
-            $("#ddd").css("width", (oldwidth + 2) + "px");
-        });
+        ////放大
+        //touch.on("#ddd", "pinchout", function (ev) {
+        //    var oldwidth = parseFloat($("#ddd").css("width").replace('px', ''));
+        //    $("#ddd").css("width", (oldwidth + 2) + "px");
+        //});
 
-        //缩小
-        touch.on("#ddd", "pinchin", function (ev) {
-            var oldwidth = parseFloat($("#ddd").css("width").replace('px', ''));
-            $("#ddd").css("width", (oldwidth -2) + "px");
-        });
+        ////缩小
+        //touch.on("#ddd", "pinchin", function (ev) {
+        //    var oldwidth = parseFloat($("#ddd").css("width").replace('px', ''));
+        //    $("#ddd").css("width", (oldwidth -2) + "px");
+        //});
 
-        touch.on('#ddd', "drag", function (ev) {
+        //touch.on('#ddd', "drag", function (ev) {
 
+        //    var localX = dx + ev.x;
+        //    var localY = dy + ev.y;
 
-            //if ($('#ddd').hasClass("m-activation")) {
-            var localX = dx + ev.x;
-            var localY = dy + ev.y;
+        //    if (localX > 0 && localX < window.innerWidth &&
+        //    localY > 0 && localY < window.innerHeight) {
+        //        this.style.webkitTransform = 'translate3d(' + localX + "px," + localY + "px,0)";
+        //    }
+        //});
 
-            if (localX > 0 && localX < window.innerWidth &&
-            localY > 0 && localY < window.innerHeight) {
-                //console.log(localX + "," + localY);
-                this.style.webkitTransform = 'translate3d(' + localX + "px," + localY + "px,0)";
-            }
-            //}
-
-            //var oldwidth = parseFloat($("#ddd").css("width").replace('px', ''));
-            //console.log($("#ddd").css("width", (oldwidth + 1) + "px"));
-
-
-        });
-
-        touch.on('#ddd', "dragend", function (ev) {
-            dx += ev.x;
-            dy += ev.y;
-        });
+        //touch.on('#ddd', "dragend", function (ev) {
+        //    dx += ev.x;
+        //    dy += ev.y;
+        //});
     </script>
 </body>
 </html>
